@@ -3,8 +3,8 @@ Numele proiectului: My Company <br/>
 Tema: Gestionarea resurselor umane <br/>
 Clasele implementate: <br/>
 •	clasa Company- care conține numele firmei, CIF-ul, contactul, numărul ne angajați, numărul de joburi, un vector cu toți angajații firmei și un vector cu job-urile pe care le pot avea aceștia <br/>
-•	clasa Employee- care are ca atribute un id pentru fiecare angajat, numele complet, contactul, salariu, job-ul pe care îl are în firmă, salariul și data la care s-a angajat <br/>
-•	clasa Contact- conține adresa, mail-ul și numărul de telefon ; aceasta este o clasă compusă și este folosită și in Company și Employee <br/>
+•	clasa Employee- care are ca atribute un id pentru fiecare angajat, numele complet, contactul, salariu, job-ul pe care îl are în firmă, salariul și data la care s-a angajat; acesta clasa contine si un obiect de tip contact si jobs <br/>
+•	clasa Contact- conține adresa, mail-ul și numărul de telefon ;<br/>
 •	clasa Jobs- care desemnează un job, salariul minim și maxim pe care îl poate avea un angajat în acea poziție <br/>
 •	clasa Job_history- care păstrează data l-a care s-a angajat și a demisionat un lucrător ar firmei <br/>
 •	clasa String- folosită pentru a declara string-urile <br/>
