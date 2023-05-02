@@ -1,70 +1,365 @@
-#include <iostream>
+﻿#include <iostream>
 #include "Company.h"
 #include "Jobs.h"
+#include "Manager.h"
+#include "Finance.h"
+#include "HR.h"
+#include "Engineering.h"
+#include "Developer.h"
+#include "Department.h"
+#include "Analyst.h"
+#include "Invalid_ID_Exception.h"
+#include "InvalidNameException.h"
+#include <exception>
 using namespace std;
 
 int main()
 {
-    Company mycompany;
-    mycompany.display();
+
+    cout << "Apasa tasta 1 pentru a afisa detaliile companiei." << endl;
+    cout << "Apasa tasta 2 pentru a crea angajatii companiei, salariul mediu si salariul cel mai mare al unui angajat din comapanie." << endl;
+    cout << "Apasa tasta 3 pentru a crea joburile companiei, care sunt de tip manager, developer si analyst,apoi afiseaza detalii despre fiecare."<<endl;
+    cout << "Apasa tasta 4 pentru a crea departamente si afisa descrierea lor,bugetul si taxa." << endl;
+    
+    int x; 
+    cout << "Tasta:";
+    cin >> x;
+    string p;
+    getline(cin,p);
     cout << endl;
 
-    Jobs job1;
-    cin >> job1;
-    Jobs job2;
-    cin >> job2;
-    mycompany.addJob(job1);
-    mycompany.addJob(job2);
+    Company mycompany;
+    if (x == 1)
+    {
+        mycompany.display();
+        cout<<mycompany.getLocation();
+        cout << endl;
+    }
    
+    if (x == 2)
+    {
+        Employee employee1;
+        Contact contact1;
+        Job_history history1;
+        employee1.set_First_name("Daria");
+        employee1.set_Last_name("i");
+        employee1.set_Employee_id(60380507);
+        employee1.set_Salary(9999);
+        employee1.set_Job("developer");
 
-    Employee employee1;
-    Contact contact1;
-    Job_history history1;
-    employee1.set_First_name("Daria");
-    employee1.set_Last_name("Horga");
-    employee1.set_Employee_id(60380507470);
-    employee1.set_Salary(9999);
-    employee1.set_Job("developer");
+        contact1.set_Phone_number("0753782910");
+        contact1.set_Adress("strada deleni 78");
+        contact1.set_Mail("dariahorga@yahoo.com");
+        employee1.set_contact(contact1);
 
-    contact1.set_Phone_number("0753782910");
-    contact1.set_Adress("Oituz 92");
-    contact1.set_Mail("dariahorga@yahoo.com");
-    employee1.set_contact(contact1);
+        history1.set_Start_date("15.08.2020");
+        history1.set_End_date(" ");
+        employee1.set_Job_history(history1);
+        cout << endl << endl;
+        bool verify1 = false;
+        while (verify1 == false)
+        {
+            try
+            {
+                verify1=mycompany.addEmployee(employee1);
+                cout << employee1;
+                cout << endl;
+                cout<<"Employee successfully added!" << endl;
+                cout << endl << endl;
+            }
+            catch (const Invalid_ID_Exception& e) {
+                cerr << "Error adding employee: " << e.getMessage() << endl;
+                cout << "Please enter a different ID for the employee: ";
+                int x;
+                cin >> x;
+                employee1.set_Employee_id(x);
+            }
+            catch (const InvalidNameException& e) {
+                cerr << "Error adding employee: " << e.getMessage() << endl;
+                cout << "Please enter a different last_name for the employee: ";
+                string x;
+                cin >> x;
+                employee1.set_Last_name(x);
+            }
+            catch (const out_of_range& e) {
+                cerr << "Error adding employee: " << e.what() << endl;
+            }
 
-    history1.set_Start_date("15.08.2020");
-    history1.set_End_date(" ");
-    employee1.set_Job_history(history1);
-    cout << endl << endl;
-    mycompany.addEmployee(employee1);
-    cout << employee1;
-    cout << endl << endl;
+        }
+        Employee employee2;
+        Contact contact2;
+        Job_history history2;
+        cin >> employee2;
+        cin >> contact2;
+        cin >> history2;
+        employee2.set_contact(contact2);
+        employee2.set_Job_history(history2);
+        bool verify2 = false;
+        while (verify2 == false)
+        {
+            try
+            {
+                verify2=mycompany.addEmployee(employee2);
+                cout << employee2;
+                cout << endl;
+                cout<<"Employee successfully added!" << endl;
+                cout << endl << endl;
+            }
+            catch (const Invalid_ID_Exception& e) {
+                cerr << "Error adding employee: " << e.getMessage() << endl;
+                cout << "Please enter a different ID for the employee: ";
+                int x;
+                cin >> x;
+                employee2.set_Employee_id(x);
+            }
+            catch (const InvalidNameException& e) {
+                cerr << "Error adding employee: " << e.getMessage() << endl;
+                cout << "Please enter a different last_name for the employee: ";
+                string x;
+                cin >> x;
+                employee2.set_Last_name(x);
+            }
+            catch (const out_of_range& e) {
+                cerr << "Error adding employee: " << e.what() << endl;
+            }
+        }
 
-    Employee employee2;
-    Contact contact2;
-    Job_history history2;
-    cin >> employee2;
-    cin >> contact2;
-    cin >> history2;
-    employee2.set_contact(contact2);
-    employee2.set_Job_history(history2);
-    mycompany.addEmployee(employee2);
-    cout << employee2;
-    cout << endl << endl;
+        Contact contact3("popescucostel@yahoo.com", "strada viitorului nr 90", "0776543290");
+        Job_history history3("15.09.2019", " ");
+        Employee employee3(50809088, "Popescu", "Costel", contact3, history3,"developer", 7465);
+        bool verify3 = false;
+        while (verify3 == false)
+        {
+            try
+            {
+                verify3=mycompany.addEmployee(employee3);
+                cout << employee3;
+                cout << endl;
+                cout << "Employee successfully added!" << endl;
+                cout << endl << endl;
+            }
+            catch (const Invalid_ID_Exception& e) {
+                cerr << "Error adding employee: " << e.getMessage() << endl;
+                cout << "Please enter a different ID for the employee: ";
+                int x;
+                cin >> x;
+                employee3.set_Employee_id(x);
+            }
+            catch (const InvalidNameException& e) {
+                cerr << "Error adding employee: " << e.getMessage() << endl;
+                cout << "Please enter a different last_name for the employee: ";
+                string x;
+                cin >> x;
+                employee3.set_Last_name(x);
+            }
+            catch (const exception& e) {
+                cerr << "Error adding employee: " << e.what() << endl;
+            }
+        }
+    }
+    
+    if (x == 2)
+    {
+        cout << endl << "Medium salary of all employees: ";
+        int salary = mycompany.getAverageSalary();
+        cout << salary << endl << endl;
+    }
 
+    if (x == 2)
+    {
+        cout << "Maximum salary is: ";
+        int max = mycompany.maximumSalary();
+        cout << max;
+    }
 
-    Contact contact3("popescucostel@yahoo.com","strada oituz 789","7654372801");
-    Job_history history3("15.09.2019"," ");
-    Employee employee3(508090887654,"Popescu","Costel",contact3,"developer", history3,7465);
-    mycompany.addEmployee(employee3);
-    cout << employee3<<endl;
+    if (x == 3)
+    {
+        Jobs* manager = new Manager(7, 5, "Manager Departament Finance", 3456, 7890);
+        Jobs* developer = new Developer(7, 9, "Developer C++", 6789, 9999);
+        Jobs* analyst = new Analyst(9, 9, "Developer C++", 9876, 9999);
 
-    cout << endl << "Medium salary of all employees: ";
-    int salary=mycompany.getAverageSalary();
-    cout << salary << endl << endl;
+        bool verify4 = false;
+        int count1 = 1;
+        Jobs* job = manager;
+        while (verify4 == false)
+        {
+            try {
+                verify4 = mycompany.addJob(*job);
+                cout << *job;
+                cout << endl;
+            }
+            catch (const InvalidNameException& e) {
+                try {
+                    if (count1 >= 3)
+                    {
+                        throw runtime_error("Exceeded maximum number of attempts to enter job title.");
+                    }
+                }
+                catch (runtime_error& e)
+                {
+                    cerr << "Error: " << e.what() << endl;
+                }
+                cerr << "Error adding job title: " << e.getMessage() << endl;
+                cout << "Please enter a different job title. " << endl;
+                cout << "Attention! You only have 3 tries." << endl;
+                cout << "New job title: ";
+                count1++;
+                string x;
+                getline(cin, x);
+                job->set_Job_title(x);
 
-    cout << "Maximum salary is: ";
-    int max = mycompany.maximumSalary();
-    cout << max;
+            }
+            catch (exception& e) {
+                cerr << "Error: " << e.what() << endl;
+                break;
+            }
+        }
+
+        bool verify5 = false;
+        int count2 = 1;
+        job = developer;
+        while (verify5 == false)
+        {
+            try {
+                verify5 = mycompany.addJob(*job);
+                cout << *job;
+                cout << endl;
+            }
+            catch (const InvalidNameException& e) {
+                try {
+                    if (count2 >= 3)
+                    {
+                        throw runtime_error("Exceeded maximum number of attempts to enter job title.");
+                    }
+                }
+                catch (runtime_error& e)
+                {
+                    cerr << "Error: " << e.what() << endl;
+                    break;
+                }
+                cerr << "Error adding job title: " << e.getMessage() << endl;
+                cout << "Please enter a different job title. " << endl;
+                cout << "Attention! You only have 3 tries." << endl;
+                cout << "New job title: ";
+                count2++;
+                string x;
+                getline(cin, x);
+                job->set_Job_title(x);
+
+            }
+            catch (exception& e) {
+                cerr << "Error: " << e.what() << endl;
+            }
+        }
+
+        bool verify6 = false;
+        int count3 = 1;
+        job = analyst;
+        while (verify6 == false)
+        {
+            try {
+                verify6 = mycompany.addJob(*job);
+                cout << *job;
+                cout << endl;
+            }
+            catch (const InvalidNameException& e) {
+                try {
+                    if (count3 >= 3)
+                    {
+                        throw runtime_error("Exceeded maximum number of attempts to enter job title.");
+                    }
+                }
+                catch (runtime_error& e)
+                {
+                    cerr << "Error: " << e.what() << endl;
+                    break;
+                }
+                cerr << "Error adding job title: " << e.getMessage() << endl;
+                cout << "Please enter a different job title. " << endl;
+                cout << "Attention! You only have 3 tries." << endl;
+                cout << "New job title: ";
+                count3++;
+                string x;
+                getline(cin, x);
+                job->set_Job_title(x);
+
+            }
+            catch (exception& e) {
+                cerr << "Error: " << e.what() << endl;
+            }
+        }
+    }
+
+    if (x == 4)
+    {
+        Department* financeDept = new Finance(987754, 23456, 5, "Microsoft_finance@yahoo.com", "unirii nr 45", "0765435678", "14.09.2009", " ");
+        Department* engineeringDept = new Engineering(989850, 12345, 10, "Microsoft_engineering@yahoo.com", "sos piepera nr 567", "0769835568", "29.05.2006", " ");
+        Department* hrDept = new HR(235679, 45678, 3, "Microsoft.hr@yahoo.com", "sos piepera nr 567", "0784235108", "08.10.2017", " ");
+
+        Department* department = financeDept;
+        try {
+            mycompany.addDepartments(*department);
+            Finance* financeDepartment = dynamic_cast<Finance*>(department);
+            financeDepartment->display_details();
+            cout << endl;
+            cout << "The budget is: ";
+            cout << department->get_Budget();
+            cout << endl;
+            cout << "The tax rate is: ";
+            cout << department->calculate_tax();
+            cout << endl;
+        }
+        catch (exception& e) {
+            cerr << "Error: " << e.what() << endl;
+            cerr << "Deleting last department from the array..." << endl;
+            mycompany.delete_LastDepartment();
+            cout << "Adding new department..." << endl;
+            mycompany.addDepartments(*financeDept);
+        }
+
+        department = hrDept;
+        try {
+            mycompany.addDepartments(*department);
+            department->display_details();
+            cout << endl;
+            cout << "The budget is: ";
+            cout << department->get_Budget();
+            cout << endl;
+            cout << "The tax rate is: ";
+            cout << department->calculate_tax();
+            cout << endl;
+        }
+        catch (exception& e) {
+            cerr << "Error: " << e.what() << endl;
+            cerr << "Deleting last department from the array..." << endl;
+            mycompany.delete_LastDepartment();
+            cout << "Adding new department..." << endl;
+            mycompany.addDepartments(*hrDept);
+        }
+
+        department = engineeringDept;
+        Engineering* engineeringDepartment = dynamic_cast<Engineering*>(department);
+        if (engineeringDepartment) {
+            try {
+                mycompany.addDepartments(*engineeringDepartment);
+                engineeringDepartment->display_details();
+                cout << endl;
+                cout << "The budget is: ";
+                cout << engineeringDepartment->get_Budget();
+                cout << endl;
+                cout << "The tax rate is: ";
+                cout << engineeringDepartment->calculate_tax();
+                cout << endl;
+            }
+            catch (exception& e) {
+                cerr << "Error: " << e.what() << endl;
+                cerr << "Deleting last department from the array..." << endl;
+                mycompany.delete_LastDepartment();
+                cout << "Adding new department..." << endl;
+                mycompany.addDepartments(*engineeringDepartment);
+            }
+        }
+    }
 
     return 0;
 }

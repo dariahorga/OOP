@@ -1,14 +1,14 @@
 #include "Employee.h"
-#include "String.h"
-#include <iostream>
 using namespace std;
+
+string Employee::_company_name = "Microsoft";
 
 Employee::Employee()
 {
 	_employee_id = 0;	
 	_salary =0;	
 }
-Employee::Employee(int employee_id, String first_name, String last_name, Contact contact, String job, Job_history job_history, int salary)
+Employee::Employee(int employee_id, string first_name, string last_name, Contact contact, Job_history job_history, string job, int salary)
 {
 	_employee_id = employee_id;
 	_first_name = first_name;
@@ -30,22 +30,22 @@ int Employee::get_Employee_id()
 	return _employee_id;
 }
 
-void Employee::set_First_name(const String & first_name)
+void Employee::set_First_name(const string & first_name)
 {
 	_first_name = first_name;
 }
 
-String Employee::get_First_name()
+string Employee::get_First_name()
 {
 	return _first_name;
 }
 
-void Employee::set_Last_name(const String & last_name)
+void Employee::set_Last_name(const string & last_name)
 {
 	_last_name = last_name;
 }
 
-String Employee::get_Last_name()
+string Employee::get_Last_name()
 {
 	return _last_name;
 }
@@ -70,39 +70,37 @@ void Employee::set_Job_history(const Job_history& job_history)
 	_job_history = job_history;
 }
 
-void Employee::set_Job(const String& job)
+void Employee::set_Job(const string& job)
 {
 	_job = job;
 }
 
-String Employee::get_Job()
+string Employee::get_Job()
 {
 	return _job;
 }
-ostream& operator << (ostream& out, const Employee& employee)
+void Employee::_cout(ostream& out)
 {
 	out << "Employee: " << endl;
-	out << "	First name: "; out << employee._first_name << endl;
-	out << "	Last name: ";  out << employee._last_name << endl;
-	out << "	Salary:" << employee._salary<<endl;
-	out << employee._contact << endl;
+	out << "	First name: "; out << _first_name << endl;
+	out << "	Last name: ";  out << _last_name << endl;
+	out << "	Salary:" << _salary<<endl;
+	out << _contact << endl;
 	out << " Job: ";
-	out << employee._job << endl;
-	out << "Job history:" << employee._job_history;
-	return out;
+	out << _job << endl;
+	out << "Job history:" << _job_history;
 }
 
-istream& operator >> (istream& in,  Employee& employee)
+void Employee::_cin(istream& in)
 {
 	cout <<  "Enter employee's first name:";
-	in >> employee._first_name;
+	in >> _first_name;
 	cout << "Enter employee's last name:";
-	in>>employee._last_name;
+	in>>_last_name;
 	cout << "Enter employee id: ";
-	in >> employee._employee_id;
+	in >> _employee_id;
 	cout << "Enter salary:";
-	in >>employee._salary;
-	return in;
+	in >>_salary;
 }
 
 Employee::Employee(const Employee& employee)
@@ -127,4 +125,8 @@ Employee & Employee::operator=(const Employee& employee)
 	_job_history = employee._job_history;
 
 	return *this;
+}
+string Employee::getCompany_name()
+{
+	return _company_name;
 }

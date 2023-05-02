@@ -1,24 +1,23 @@
 #pragma once
-#include "String.h"
+#include <string>
+#include <iostream>
+#include "I_IO.h"
 using namespace std;
 
-class Jobs
+class Jobs: public I_IO
 { 
-public:
-
-
-private:
-	String      _job_title;
+protected:
 	int         _min_salary;
 	int         _max_salary;
+	string _job_title;	
 
 public:
     
 	Jobs();
 
-	Jobs(String job_title, int min_salary, int max_salary);
+	Jobs(string job_title, int min_salary, int max_salary);
 
-	~Jobs();
+	virtual ~Jobs();
 
 	void set_Min_salary(int min_salary);
 
@@ -28,12 +27,15 @@ public:
 
 	int get_Max_salary();
 
-	void set_Job_title(const String & job_title);
+	virtual void _cin(istream& in);
 
-	String& get_Job_title();
+	virtual void _cout(ostream& out);
 
-	friend ostream& operator << (ostream& out, const Jobs& job);
+	string get_Job_title() const;
 
-	friend istream& operator >> (istream& in, Jobs& job);
+	virtual void set_Job_title(const string& job_title);
+
+
+	
 };
 

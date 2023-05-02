@@ -33,7 +33,34 @@
     <ClCompile Include="Job_history.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="String.cpp">
+    <ClCompile Include="Manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Developer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Department.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Finance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engineering.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Analyst.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Invalid_ID_Exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InvalidNameException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="I_IO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +80,34 @@
     <ClInclude Include="Job_history.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="String.h">
+    <ClInclude Include="Manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Developer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Department.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Finance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engineering.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Analyst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Invalid_ID_Exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InvalidNameException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="I_IO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

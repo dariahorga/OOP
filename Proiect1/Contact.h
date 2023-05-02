@@ -1,36 +1,38 @@
 #pragma once
-#include "String.h"
+#include "I_IO.h"
+#include <iostream>
+#include <string>
 using namespace std;
 
-class Contact
+class Contact: public I_IO
 {
-	String     _mail;
-	String     _phone_number;
-	String     _adress;
+	string     _mail;
+	string     _phone_number;
+	string     _adress;
 
 public:
 	
 	Contact();
 
-	Contact(String mail,String adress, String phone_number);
+	Contact(string mail,string adress, string phone_number);
 
 	~Contact();
 
-	void set_Mail(String mail);
+	void set_Mail(string mail);
 
-	String get_Mail();
+	string get_Mail();
 	
-	void set_Adress(String adress);
+	void set_Adress(string adress);
 
-	String get_Adress();
+	string get_Adress();
 
-	void set_Phone_number(String phone_number);
+	void set_Phone_number(string phone_number);
 
-	String get_Phone_number();
-    
-	friend ostream& operator << (ostream& out, const Contact& contact);
+	string get_Phone_number();
 
-	friend istream& operator >> (istream& in, Contact& contact);
+	void _cin(istream& in);
+
+	void _cout(ostream& out);
 
 	void display();
 

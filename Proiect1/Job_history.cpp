@@ -1,6 +1,6 @@
 #include "Job_history.h"
 
-Job_history::Job_history(String start_date, String end_date)
+Job_history::Job_history(string start_date, string end_date)
 {
 	_start_date = start_date;
 	_end_date = end_date;
@@ -18,38 +18,36 @@ Job_history::~Job_history()
 	_end_date = "never";
 
 }
-void Job_history::set_Start_date(String start_date)
+void Job_history::set_Start_date(string start_date)
 {
 	_start_date = start_date;
 }
 
-String Job_history::get_Start_date()
+string Job_history::get_Start_date()
 {
 	return _start_date;
 }
 
-void Job_history::set_End_date(String end_date)
+void Job_history::set_End_date(string end_date)
 {
 	_end_date = end_date;
 }
 
-String Job_history::get_End_date()
+string Job_history::get_End_date()
 {
 	return _end_date;
 }
-
-ostream& operator << (ostream& out, const Job_history& job_history)
+void Job_history::_cout(ostream& out)
 {
-	out << job_history._start_date << "-" << job_history._end_date;
-	return out;
+	out << _start_date << "-" <<_end_date;
 }
 
-istream& operator >> (istream& in, Job_history& job_history)
+void Job_history::_cin(istream& in)
 {
 	cout << "Enter job history:" << endl;
 	cout << "Start date:";
-	in >> job_history._start_date;
+	in >>_start_date;
 	cout << "End date:";
-	in>>job_history._end_date;
-	return in;
+	in>>_end_date;
+
 }

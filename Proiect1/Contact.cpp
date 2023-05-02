@@ -1,6 +1,4 @@
 #include "Contact.h"
-#include <iostream>
-#include "String.h"
 using namespace std;
 
 Contact::Contact()
@@ -8,7 +6,7 @@ Contact::Contact()
 
 }
 
-Contact::Contact(String mail,String adress,String phone_number)
+Contact::Contact(string mail,string adress,string phone_number)
 {
 	_mail = mail;
 	_adress = adress;
@@ -20,52 +18,50 @@ Contact::~Contact()
 
 }
 
-void Contact::set_Mail(String mail)
+void Contact::set_Mail(string mail)
 {
 	_mail=mail;
 }
 
-String Contact::get_Mail()
+string Contact::get_Mail()
 {
 	return _mail;
 }
 
-void Contact::set_Adress(String adress)
+void Contact::set_Adress(string adress)
 {
      _adress = adress;
 }
 
-String Contact::get_Adress()
+string Contact::get_Adress()
 {
 	return _adress;
 }
 
-void Contact::set_Phone_number(String phone_number)
+void Contact::set_Phone_number(string phone_number)
 {
 	_phone_number=phone_number;	
 }
 
-String Contact::get_Phone_number()
+string Contact::get_Phone_number()
 {
 	return _phone_number;
 }
 
-ostream& operator << (ostream& out, const Contact& contact)
+void Contact::_cout(ostream& out)
 {
 	out << "Contact: " << endl;
-	out << "	adress: " << contact._adress << endl;
-	out << "	phone_number: " <<contact._phone_number << endl;
-	out << "	mail:" << contact._mail;
-	return out;
+	out << "	adress: " << _adress << endl;
+	out << "	phone_number: " <<_phone_number << endl;
+	out << "	mail:" << _mail;
 }
 
-istream& operator >> (istream& in, Contact& contact)
+void Contact::_cin(istream& in)
 {
 	cout << "Enter contact: " << endl;
-	cout << "	adress: ";	in >> contact._adress;
-	cout << "	phone_number: ";	in >> contact._phone_number;	
-	cout << "	mail: "; in >> contact._mail;
-	return in;
+	cout << "	adress: ";	in >> _adress;
+	cout << "	phone_number: ";	in >> _phone_number;	
+	cout << "	mail: "; in >> _mail;
 }
 
 void Contact:: display()

@@ -2,25 +2,28 @@
 #include "Contact.h"
 #include "Jobs.h"
 #include "Job_history.h"
-#include "String.h"
+#include "I_IO.h"
+#include <string>
 #include <iostream>
 using namespace std;
 
-class Employee
+class Employee: public I_IO
 {
 public:
+
 	Employee();
-	Employee(int employee_id, String _first_name, String _last_name, Contact contact, String job, Job_history job_history, int salary);
+	Employee(int employee_id, string _first_name, string _last_name, Contact contact,Job_history job_history, string job, int salary);
 
 private:
 
 	int			_employee_id;
-	String		_first_name;
-	String		_last_name;
-	Contact		_contact;
-	String		_job;
-	Job_history _job_history;
+	string		_first_name;
+	string		_last_name;
+	string		_job;
 	int			_salary;
+	Contact     _contact;
+	Job_history _job_history;
+	static string _company_name;
 
 public:
 
@@ -28,13 +31,13 @@ public:
 	
 	int get_Employee_id();
 
-	void set_First_name(const String & first_name);
+	void set_First_name(const string & first_name);
 
-	String get_First_name();
+	string get_First_name();
 
-	void set_Last_name(const String & last_name);
+	void set_Last_name(const string & last_name);
 
-	String get_Last_name();
+	string get_Last_name();
 
 	void set_Salary(int salary);
 
@@ -44,16 +47,19 @@ public:
 
 	void set_Job_history(const Job_history& job_history);
 
-	void set_Job(const String& job);
+	void set_Job(const string& job);
 
-	String get_Job();
+	string get_Job();
 
-	friend ostream& operator << (ostream& out, const Employee& employee);
+	void _cin(istream& in);
 
-	friend istream& operator >> (istream& in, Employee& employee);
+	void _cout(ostream& out);
 
 	Employee(const Employee& employee);
 
 	Employee& operator=(const Employee& employee);
+
+	static string getCompany_name();
+
 };
 

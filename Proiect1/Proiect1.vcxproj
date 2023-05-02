@@ -127,21 +127,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Analyst.cpp" />
     <ClCompile Include="Company.cpp" />
     <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="Department.cpp" />
+    <ClCompile Include="Developer.cpp" />
     <ClCompile Include="Employee.cpp" />
+    <ClCompile Include="Invalid_ID_Exception.cpp" />
+    <ClCompile Include="Engineering.cpp" />
+    <ClCompile Include="Finance.cpp" />
+    <ClCompile Include="HR.cpp" />
+    <ClCompile Include="InvalidNameException.cpp" />
+    <ClCompile Include="I_IO.cpp" />
     <ClCompile Include="Jobs.cpp" />
     <ClCompile Include="Job_history.cpp" />
+    <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Proiect1.cpp" />
-    <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Analyst.h" />
     <ClInclude Include="Company.h" />
     <ClInclude Include="Contact.h" />
+    <ClInclude Include="Department.h" />
+    <ClInclude Include="Developer.h" />
     <ClInclude Include="Employee.h" />
+    <ClInclude Include="Engineering.h" />
+    <ClInclude Include="Finance.h" />
+    <ClInclude Include="HR.h" />
+    <ClInclude Include="InvalidNameException.h" />
+    <ClInclude Include="Invalid_ID_Exception.h" />
+    <ClInclude Include="I_IO.h" />
     <ClInclude Include="Jobs.h" />
     <ClInclude Include="Job_history.h" />
-    <ClInclude Include="String.h" />
+    <ClInclude Include="Manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

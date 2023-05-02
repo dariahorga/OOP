@@ -1,31 +1,32 @@
 #pragma once
-#include "String.h"
+#include <string>
+#include "I_IO.h"
+#include <iostream>
 using namespace std;
 
-class Job_history
+class Job_history: public I_IO
 {
-	String _start_date;
-	String _end_date;
+	string _start_date;
+	string _end_date;
 	
 public:
 
-	Job_history(String start_date, String end_date);
+	Job_history(string start_date, string end_date);
 
 	Job_history();
 
 	~Job_history();
 
-	void set_Start_date(String start_date);
+	void set_Start_date(string start_date);
 
-	String get_Start_date();
+	string get_Start_date();
 
-	void set_End_date(String end_date);
+	void set_End_date(string end_date);
 
-	String get_End_date();
+	string get_End_date();
+	
+	void _cin(istream& in);
 
-	friend ostream& operator << (ostream& out, const Job_history& job_history);
-
-	friend istream& operator >> (istream& in, Job_history& job_history);
-
+	void _cout(ostream& out);
 };
 
