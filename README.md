@@ -19,4 +19,6 @@ Funcționalitățile proiectului: <br/>
 •	Permite afișarea pe ecran a tutoror detaliilor despre firmă, de la anagajați, până la locație și adresa de mail, numărul de telefon <br/>
 •	Calculează salariu mediu al angajaților din firmă <br/>
 •	Afișează pe ecran salariul cel mai mare din firma <br/>
+•	Permite crearea departamentelor si afisarea unei descrieri,bugetul si taxa. </br>
+
 
