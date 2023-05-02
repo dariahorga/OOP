@@ -7,9 +7,16 @@ Clasele implementate: <br/>
 •	clasa Contact- conține adresa, mail-ul și numărul de telefon ;<br/>
 •	clasa Jobs- care desemnează un job, salariul minim și maxim pe care îl poate avea un angajat în acea poziție <br/>
 •	clasa Job_history- care păstrează data l-a care s-a angajat și a demisionat un lucrător ar firmei <br/>
-•	clasa String- folosită pentru a declara string-urile <br/>
+•	clasele Developer, Manager, Analyst, mostenite din clasa Jobs <br/>
+•	clasa Departments mostenita din Contact si Job_history, clasa abstracta <br/>
+•	clasele HR, Engineering si Finance, mostenite din Departments <br/>
+•	I_IO interfata in care am metoda de afisare si citire <br/>
+•	Invalid_ID_exception <br/>
+•	InvalidNameException <br/>
+
 Funcționalitățile proiectului: <br/>
 •	Permite citirea de la tastatură și crearea obiectelor de tip Employee, Jobs și le adaugă în vectori ce stochează obiectele de acest tip(metoda addEmployees și metoda addJobs) <br/>
 •	Permite afișarea pe ecran a tutoror detaliilor despre firmă, de la anagajați, până la locație și adresa de mail, numărul de telefon <br/>
 •	Calculează salariu mediu al angajaților din firmă <br/>
 •	Afișează pe ecran salariul cel mai mare din firma <br/>
+
