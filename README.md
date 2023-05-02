@@ -20,5 +20,6 @@ Funcționalitățile proiectului: <br/>
 •	Calculează salariu mediu al angajaților din firmă <br/>
 •	Afișează pe ecran salariul cel mai mare din firma <br/>
 •	Permite crearea departamentelor si afisarea unei descrieri,bugetul si taxa. </br>
+•	Arunca anumite exceptii in cazul in care introduci un id care este deja in firma, un nume gresit sau depasesti numarul maxim de departamente/ joburi/ angajati. </br>
 
 
