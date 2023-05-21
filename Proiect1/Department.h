@@ -19,6 +19,8 @@ public:
 	virtual void display_details() const=0;
 	virtual int calculate_tax() const=0;
 	virtual int get_Budget() const = 0;
+	virtual int get_number_tasks() const = 0;
+	virtual string get_Department_name() const = 0;
 	Department* operator=(const Department* department);
 	virtual Department* clone() const = 0;
 

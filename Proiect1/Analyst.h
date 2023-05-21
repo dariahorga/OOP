@@ -8,13 +8,13 @@ class Analyst : public Jobs
 {
 	int _work_hours;
     int _number_projects;
-
-
-public:
-
+	static Analyst* _instance_Analyst;
 	Analyst();
 	virtual ~Analyst();
-	Analyst(int work_hours,int number_projects, string job_title, int max_salary, int min_salary);
+
+public:
+	Analyst(const Analyst& analyst) = delete;
+	static Analyst* getInstance();
 	void _cout(ostream& out);
 	void set_Job_title(const string& job_title);
 

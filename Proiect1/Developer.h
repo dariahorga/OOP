@@ -8,11 +8,13 @@ class Developer: public Jobs
 {
 	int _work_hours;
 	int _number_projects;
-
-public:
+	static Developer* _instance_Developer;
 	Developer();
 	~Developer();
-	Developer(int work_hours,int number_projects, string job_title, int max_salary, int min_salary);
+
+public:
+	Developer(const Developer& developer) = delete;
+	static Developer* getInstance();
 	void _cout(ostream& out);
 	void set_Job_title(const string& job_title);
 

@@ -133,6 +133,7 @@
     <ClCompile Include="Department.cpp" />
     <ClCompile Include="Developer.cpp" />
     <ClCompile Include="Employee.cpp" />
+    <ClCompile Include="Evaluation.cpp" />
     <ClCompile Include="Invalid_ID_Exception.cpp" />
     <ClCompile Include="Engineering.cpp" />
     <ClCompile Include="Finance.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="Jobs.cpp" />
     <ClCompile Include="Job_history.cpp" />
     <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Proiect1.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +154,7 @@
     <ClInclude Include="Developer.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Engineering.h" />
+    <ClInclude Include="Evaluation.h" />
     <ClInclude Include="Finance.h" />
     <ClInclude Include="HR.h" />
     <ClInclude Include="InvalidNameException.h" />
@@ -160,6 +163,7 @@
     <ClInclude Include="Jobs.h" />
     <ClInclude Include="Job_history.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="Observer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

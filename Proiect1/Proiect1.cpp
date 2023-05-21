@@ -11,6 +11,8 @@
 #include "Invalid_ID_Exception.h"
 #include "InvalidNameException.h"
 #include <exception>
+#include "Evaluation.h"
+
 using namespace std;
 
 int main()
@@ -20,6 +22,7 @@ int main()
     cout << "Apasa tasta 2 pentru a crea angajatii companiei, salariul mediu si salariul cel mai mare al unui angajat din comapanie." << endl;
     cout << "Apasa tasta 3 pentru a crea joburile companiei, care sunt de tip manager, developer si analyst,apoi afiseaza detalii despre fiecare."<<endl;
     cout << "Apasa tasta 4 pentru a crea departamente si afisa descrierea lor,bugetul si taxa." << endl;
+    cout << "Apasa tasta 5 pentru a arunca o analiza a firmei." << endl;
     
     int x; 
     cout << "Tasta:";
@@ -32,6 +35,11 @@ int main()
     if (x == 1)
     {
         mycompany.display();
+        unique_ptr<Observer*> observer1;
+        unique_ptr<Observer*> observer2;
+        mycompany.attachObserver(move(observer1));
+        mycompany.attachObserver(move(observer2));
+
         cout<<mycompany.getLocation();
         cout << endl;
     }
@@ -55,16 +63,16 @@ int main()
         history1.set_Start_date("15.08.2020");
         history1.set_End_date(" ");
         employee1.set_Job_history(history1);
+        employee1.set_Department_id(123);
+        employee1.set_number_tasks(10);
         cout << endl << endl;
         bool verify1 = false;
         while (verify1 == false)
         {
             try
             {
-                verify1=mycompany.addEmployee(employee1);
+                verify1=mycompany.addEmployee(&employee1);
                 cout << employee1;
-                cout << endl;
-                cout<<"Employee successfully added!" << endl;
                 cout << endl << endl;
             }
             catch (const Invalid_ID_Exception& e) {
@@ -99,10 +107,8 @@ int main()
         {
             try
             {
-                verify2=mycompany.addEmployee(employee2);
+                verify2=mycompany.addEmployee(&employee2);
                 cout << employee2;
-                cout << endl;
-                cout<<"Employee successfully added!" << endl;
                 cout << endl << endl;
             }
             catch (const Invalid_ID_Exception& e) {
@@ -126,16 +132,14 @@ int main()
 
         Contact contact3("popescucostel@yahoo.com", "strada viitorului nr 90", "0776543290");
         Job_history history3("15.09.2019", " ");
-        Employee employee3(50809088, "Popescu", "Costel", contact3, history3,"developer", 7465);
+        Employee employee3(50809088, "Popescu", "Costel", contact3, history3,"developer", 7465,122,8);
         bool verify3 = false;
         while (verify3 == false)
         {
             try
             {
-                verify3=mycompany.addEmployee(employee3);
+                verify3=mycompany.addEmployee(&employee3);
                 cout << employee3;
-                cout << endl;
-                cout << "Employee successfully added!" << endl;
                 cout << endl << endl;
             }
             catch (const Invalid_ID_Exception& e) {
@@ -174,9 +178,9 @@ int main()
 
     if (x == 3)
     {
-        Jobs* manager = new Manager(7, 5, "Manager Departament Finance", 3456, 7890);
-        Jobs* developer = new Developer(7, 9, "Developer C++", 6789, 9999);
-        Jobs* analyst = new Analyst(9, 9, "Developer C++", 9876, 9999);
+        Jobs* manager = Manager::getInstance(); 
+        Jobs* developer = Developer::getInstance(); 
+        Jobs* analyst = Analyst::getInstance();
 
         bool verify4 = false;
         int count1 = 1;
@@ -292,9 +296,9 @@ int main()
 
     if (x == 4)
     {
-        Department* financeDept = new Finance(987754, 23456, 5, "Microsoft_finance@yahoo.com", "unirii nr 45", "0765435678", "14.09.2009", " ");
-        Department* engineeringDept = new Engineering(989850, 12345, 10, "Microsoft_engineering@yahoo.com", "sos piepera nr 567", "0769835568", "29.05.2006", " ");
-        Department* hrDept = new HR(235679, 45678, 3, "Microsoft.hr@yahoo.com", "sos piepera nr 567", "0784235108", "08.10.2017", " ");
+        Department* financeDept = Finance::getInstance();
+        Department* engineeringDept = Engineering::getInstance(); 
+        Department* hrDept = HR::getInstance();
 
         Department* department = financeDept;
         try {
@@ -361,6 +365,14 @@ int main()
         }
     }
 
+    if (x == 5)
+    {
+        mycompany.sortEmployeesByTasks();
+        mycompany.sortDepartmentsByTasks();
+        mycompany.getAverageNumberOfTasks();
+
+
+    }
     return 0;
 }
 

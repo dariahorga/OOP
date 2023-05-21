@@ -1,10 +1,13 @@
 #include "Engineering.h"
 
-Engineering::~Engineering()
+Engineering::Engineering(): Department("Microsoft_engineering@yahoo.com", "sos piepera nr 567", "0769835568", "29.05.2006", " ")
 {
-
+    _department_id = 122;
+    _budget = 3452689;
+    _number_employees = 6;
+    _number_tasks = 14;
 }
-Engineering::Engineering()
+Engineering::~Engineering()
 {
 
 }
@@ -13,8 +16,6 @@ void Engineering::display_details() const
 	cout << "Engineering department: " << endl;
 	cout << "As the cornerstone of our company, Microsoft Engineers always aspire to be the best in the industry. Whether coding, building, hacking, designing, or testing, they consistently put their passion and energy into delivering world-class products.";
 }
-Engineering::Engineering(int department_id, int budget, int number_employees, string mail, string adress, string phone_number, string start_date, string end_date) : Department(mail, adress, phone_number, start_date, end_date), _department_id(department_id), _budget(budget), _number_employees(number_employees)
-{}
 int Engineering::calculate_tax() const
 {
 	return _budget * 0.1; // 10% rate tax
@@ -29,3 +30,28 @@ Department* Engineering::clone() const
 	*engineering = *this;
 	return engineering;
 }
+Engineering* Engineering::getInstance()
+{
+    if (_instance_Engineering == nullptr)
+    {
+        _instance_Engineering = new Engineering();
+        return _instance_Engineering;
+    }
+    else
+    {
+        return _instance_Engineering;
+    }
+}
+
+string Engineering::get_Department_name() const
+{
+    return "Engineering";
+}
+int Engineering::get_number_tasks() const
+{
+    return _number_tasks;
+}
+
+Engineering* Engineering::_instance_Engineering = nullptr;
+
+

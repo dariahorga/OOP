@@ -1,18 +1,13 @@
 #include "Manager.h"
 
-Manager::Manager() 
+Manager::Manager() : Jobs("Manager Departament Finance", 3456, 7890)
 {
 
-	_number_employees=0;
-	_work_hours=0;	
+	_number_employees=23;
+	_work_hours=7;	
 }
 
 Manager::~Manager()
-{
-}
-
-Manager::Manager(int number_employees, int work_hours, string job_title, int max_salary, int min_salary)
-	: Jobs(job_title, max_salary, min_salary), _number_employees(number_employees), _work_hours(work_hours)
 {
 }
 
@@ -27,4 +22,17 @@ void Manager::set_Job_title(const string& job_title)
 {
 	_job_title = job_title;
 }
+Manager* Manager::getInstance()
+{
+    if (_instance_Manager == nullptr)
+    {
+        _instance_Manager = new Manager();
+        return _instance_Manager;
+    }
+    else
+    {
+        return _instance_Manager;
+    }
+}
+Manager* Manager::_instance_Manager = nullptr;
 

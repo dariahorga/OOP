@@ -2,10 +2,11 @@
 #include <exception>
 #include "Invalid_ID_Exception.h"
 #include "InvalidNameException.h"
+#include "Evaluation.cpp"
 
 using namespace std;
 
-string Company:: _location = "Romania";
+string Company::_location = "Romania";
 
 Company::Company()
 {
@@ -14,114 +15,104 @@ Company::Company()
 	_contact.set_Phone_number("0771892635");
 	_contact.set_Mail("microsoft@yahoo.com");
 	_contact.set_Adress("Bulevardul Unirii nr. 89");
-
-	_employees = new Employee[10];	
-	_number_employees = 0;
-
-	_jobs = new Jobs[2];
-	_number_jobs = 0;
-
-	_departments = new Department*[2];
-	_number_departments = 0;
 }
 
 Company::~Company()
 {
-	if (_employees != nullptr)
-		delete[] _employees;
-	_employees = nullptr;
+	for (Employee* employee : _employees)
+	{
+		delete employee;
+	}
+	_employees.clear();
 
-	if (_jobs != nullptr)
-		delete[] _jobs;
-	_jobs = nullptr;
+	_jobs.clear();
 
-	_number_employees = 0;
-
-	if (_departments != nullptr)
-		delete[] _departments;
-	_departments = nullptr;
+	for (auto departmentPtr : _departments)
+	{}
+  _departments.clear();
+  _observers.clear();
 }
 
-bool Company::addEmployee( Employee& employee)
+bool Company::addEmployee(Employee* employee)
 {
-		if (_number_employees >= 9)
+	if (_employees.size() >= 9)
+	{
+		throw InvalidNameException("Maximum number of employees reached");
+		return false;
+	}
+
+	for (int i = 0; i < _employees.size(); i++)
+	{
+		if (_employees[i]->get_Employee_id() == employee->get_Employee_id())
 		{
-			throw InvalidNameException("Maximum number of employees reached");
+			throw Invalid_ID_Exception("Employee ID already exists");
 			return false;
 		}
+	}
 
-		for (int i = 0; i < _number_employees; i++)
-		{
-			if (_employees[i].get_Employee_id() == employee.get_Employee_id())
-			{
-				throw Invalid_ID_Exception("Employee ID already exists");
-				return false;
-			}
-		}
+	if (employee->get_Last_name().length() < 3 || employee->get_Last_name().length() > 30 || employee->get_Last_name() == " ")
+	{
+		throw InvalidNameException("Invalid employee name");
+		return false;
+	}
 
-		if (employee.get_Last_name().length() < 3 || employee.get_Last_name().length() > 30 || employee.get_Last_name() == " ")
-		{
-			throw InvalidNameException("Invalid employee name");
-			return false;
-		}
+	_employees.push_back(employee);
 
-		_employees[_number_employees] = employee;
-		_number_employees++;
-
-		return true;
-
+	notifyObservers("New employee added: " + employee->get_Last_name());
+	return true;
 }
 
 bool Company::addJob(const Jobs& job)
 {
-		if (_number_jobs > 2)
-		{
-			throw exception("Maximum number of jobs reached");
-			return false;
-		}
-		for (int i = 0; i < _number_jobs; i++)
-		{
-			if (_jobs[i].get_Job_title() == job.get_Job_title())
-			{
-				throw InvalidNameException("Invalid job title");
-				return false;
-			}
-		}
-		_jobs[_number_jobs] = job;
-		_number_jobs++;
-
-		return true;
-}
-
-bool Company::addDepartments(const Department& department) {
-	if (_number_departments >= 2) {
-		throw exception("Maximum number of departments reached");
+	if (_jobs.size() >= 2)
+	{
+		throw exception("Maximum number of jobs reached");
 		return false;
 	}
-	_departments[_number_departments] = department.clone();
-	_number_departments++;
+	for (int i = 0; i < _jobs.size(); i++)
+	{
+		if (_jobs[i].get_Job_title() == job.get_Job_title())
+		{
+			throw InvalidNameException("Invalid job title");
+			return false;
+		}
+	}
+	_jobs.push_back(job);
+
+	notifyObservers("New job added: " + job.get_Job_title());
 	return true;
 }
 
-void Company:: delete_LastDepartment()
+bool Company::addDepartments(const Department& department)
 {
-	if(_number_departments == 0) 
-		throw exception("No departments to delete");
-	Department* d =getLastDepartment();
-	_departments[_number_departments - 1] = nullptr;
-	delete d;
-	_number_departments--;
+	if (_departments.size() >= 2)
+	{
+		throw exception("Maximum number of departments reached");
+		return false;
+	}
+	Department* dep = department.clone();
+	_departments.push_back(make_shared<Department*>(dep));
 
+	notifyObservers("New department added: " + department.get_Department_name());
+	return true;
+}
+
+void Company::delete_LastDepartment()
+{
+	if (_departments.empty())
+		throw exception("No departments to delete");
+
+	_departments.pop_back();
 }
 
 void Company::display()
 {
-
 	cout << "Name: " << _name << endl;
 	cout << "CIF: " << _CIF << endl;
 	_contact.display();
-	cout << "Location:";
+	cout << "Location: " << _location << endl;
 }
+
 string Company::getLocation()
 {
 	return _location;
@@ -129,35 +120,113 @@ string Company::getLocation()
 
 int Company::getAverageSalary()
 {
-	if (_number_employees == 0)
+	if (_employees.size() == 0)
 		return 0;
 
 	int salary = 0;
-	for (int i = 0; i < _number_employees; i++)
-	{		
-		salary = salary + _employees[i].get_Salary();
+	for (int i = 0; i < _employees.size(); i++)
+	{
+		salary = salary + _employees[i]->get_Salary();
 	}
-	salary = salary / _number_employees;
+	salary = salary / _employees.size();
 	return salary;
 }
 
-
 int Company::maximumSalary()
 {
-	if (_number_employees == 0)
+	if (_employees.size() == 0)
 		return 0;
 
 	int maximum = 0;
-	for (int i = 0; i < _number_employees; i++)
+	for (int i = 0; i < _employees.size(); i++)
 	{
-		if (_employees[i].get_Salary() > maximum)
-			maximum = _employees[i].get_Salary();
+		if (_employees[i]->get_Salary() > maximum)
+			maximum = _employees[i]->get_Salary();
 	}
 
 	return maximum;
 }
-Department* Company::getLastDepartment()
+
+shared_ptr<Department *> Company::getLastDepartment()
 {
-	return _departments[_number_departments-1];
+	if (_departments.empty())
+		return nullptr;
+
+	return _departments.back();
+}
+void Company::notifyObservers(const string& message)
+{
+	for (const auto& observer : _observers)
+		(*observer)->update(message);
 }
 
+void Company::attachObserver(unique_ptr<Observer*> observer)
+{
+	_observers.push_back(move(observer));
+}
+
+void Company::detachObserver(Observer* observer)
+{
+	auto it = std::find_if(_observers.begin(), _observers.end(),
+		[observer](const auto& o) { return *o == observer; });
+
+	if (it != _observers.end())
+		_observers.erase(it);
+}
+
+void Company::update(const string& message)
+{
+	cout << message << endl;
+}
+
+void Company::sortEmployeesByTasks()
+{
+	Evaluation<Employee*> employeeSorter(_employees);
+	_employees = employeeSorter.getSortedObjects();
+}
+
+void Company::sortDepartmentsByTasks()
+{
+	vector< Department*> vect_depart;
+
+	for (shared_ptr<Department*> dep : _departments)
+	{
+		vect_depart.push_back(*dep);
+	}
+
+	Evaluation<Department*> departmentSorter(vect_depart);
+
+	vect_depart = departmentSorter.getSortedObjects();
+
+	_departments.clear();
+
+	for (Department* dep : vect_depart)
+	{
+		_departments.push_back(make_shared<Department *>(dep));
+	}
+
+}
+
+void Company::getAverageNumberOfTasks()
+{
+	Evaluation<Employee*> employeeEvaluation(_employees);
+	double averageTasksEmployees = employeeEvaluation.getAverageNumberOfTasks();
+	cout << "Average number of tasks per employee: " << averageTasksEmployees << endl;
+
+	vector< Department*> vect_depart;
+
+	for (shared_ptr<Department*> dep : _departments)
+	{
+		vect_depart.push_back(*dep);
+	}
+
+	Evaluation<Department*> departmentEvaluation(vect_depart);
+	double averageTasksDepartments = departmentEvaluation.getAverageNumberOfTasks();
+	cout << "Average number of tasks per department: " << averageTasksDepartments << endl;
+	_departments.clear();
+
+	for (Department* dep : vect_depart)
+	{
+		_departments.push_back(make_shared<Department*>(dep));
+	}
+}

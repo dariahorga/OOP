@@ -7,13 +7,14 @@ class Manager : public Jobs
 {
 	int _number_employees;
 	int _work_hours;
+	static Manager* _instance_Manager;
+	Manager();
+	virtual ~Manager();
 
 
 public:
-
-	Manager();
-	virtual ~Manager();
-	Manager(int number_employees, int work_hours, string job_title, int max_salary, int min_salary);
+	Manager(const Manager& manager) = delete;
+	static Manager* getInstance();
 	void _cout(ostream& out);
 	void set_Job_title(const string& job_title);
 

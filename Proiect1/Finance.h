@@ -7,14 +7,19 @@ class Finance : public Department
 	int _department_id;
 	int _budget;
 	int _number_employees;
-
-public:
+	int _number_tasks;
+	static Finance* _instance_Finance;
 	~Finance();
 	Finance();
+
+public:
+	Finance(const Finance& finance) = delete;
+	static Finance* getInstance();
 	void display_details() const;
-	Finance(int department_id,int budget,int number_employees, string mail, string adress, string phone_number, string start_date, string end_date);
     int calculate_tax() const;
 	int get_Budget() const;
+	int get_number_tasks() const;
+	string get_Department_name() const;
 	Department* clone() const;
 };
 

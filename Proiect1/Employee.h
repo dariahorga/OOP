@@ -12,7 +12,7 @@ class Employee: public I_IO
 public:
 
 	Employee();
-	Employee(int employee_id, string _first_name, string _last_name, Contact contact,Job_history job_history, string job, int salary);
+	Employee(int employee_id, string _first_name, string _last_name, Contact contact,Job_history job_history, string job, int salary,int department_id,int number_tasks);
 
 private:
 
@@ -23,7 +23,8 @@ private:
 	int			_salary;
 	Contact     _contact;
 	Job_history _job_history;
-	static string _company_name;
+	int         _department_id;
+	int         _number_tasks;
 
 public:
 
@@ -59,7 +60,14 @@ public:
 
 	Employee& operator=(const Employee& employee);
 
-	static string getCompany_name();
+	void set_Department_id(int department_id);
+
+	int get_Department_id();
+
+	void set_number_tasks(int number_tasks);
+
+	int get_number_tasks();
+
 
 };
 

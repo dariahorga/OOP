@@ -1,14 +1,12 @@
 #include "Employee.h"
 using namespace std;
 
-string Employee::_company_name = "Microsoft";
-
 Employee::Employee()
 {
 	_employee_id = 0;	
 	_salary =0;	
 }
-Employee::Employee(int employee_id, string first_name, string last_name, Contact contact, Job_history job_history, string job, int salary)
+Employee::Employee(int employee_id, string first_name, string last_name, Contact contact, Job_history job_history, string job, int salary,int department_id,int number_tasks)
 {
 	_employee_id = employee_id;
 	_first_name = first_name;
@@ -17,6 +15,8 @@ Employee::Employee(int employee_id, string first_name, string last_name, Contact
 	_salary = salary;
 	_contact = contact;
 	_job_history = job_history;
+	_department_id = department_id;
+	_number_tasks = number_tasks;
 
 }
 
@@ -89,6 +89,7 @@ void Employee::_cout(ostream& out)
 	out << " Job: ";
 	out << _job << endl;
 	out << "Job history:" << _job_history;
+	out << "Number of tasks: " << _number_tasks;
 }
 
 void Employee::_cin(istream& in)
@@ -101,6 +102,10 @@ void Employee::_cin(istream& in)
 	in >> _employee_id;
 	cout << "Enter salary:";
 	in >>_salary;
+	cout << "Enter department_id: ";
+	in >> _department_id;
+	cout << "Enter number of tasks: ";
+	in >> _number_tasks;
 }
 
 Employee::Employee(const Employee& employee)
@@ -112,6 +117,8 @@ Employee::Employee(const Employee& employee)
 	_salary = employee._salary;
 	_contact = employee._contact;
 	_job_history = employee._job_history;
+	_department_id = employee._department_id;
+	_number_tasks = employee._number_tasks;
 }
 
 Employee & Employee::operator=(const Employee& employee)
@@ -123,10 +130,26 @@ Employee & Employee::operator=(const Employee& employee)
 	_salary = employee._salary;
 	_contact = employee._contact;
 	_job_history = employee._job_history;
+	_department_id = employee._department_id;
+	_number_tasks = employee._number_tasks;
 
 	return *this;
 }
-string Employee::getCompany_name()
+void Employee::set_Department_id(int department_id)
 {
-	return _company_name;
+	_department_id = department_id;
+}
+
+int Employee::get_Department_id()
+{
+	return _department_id;
+}
+void Employee::set_number_tasks(int number_tasks)
+{
+	_number_tasks = number_tasks;
+}
+
+int Employee::get_number_tasks()
+{
+	return _number_tasks;
 }
